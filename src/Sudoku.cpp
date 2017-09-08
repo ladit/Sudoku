@@ -1,12 +1,23 @@
-// Sudoku.cpp: 定义控制台应用程序的入口点。
-//
+/**
+ * Use the DFS and Backtracking algorithm to generate Sudoku, base on C++.
+ *
+ * @author Ladit
+ * @functions
+ *   SudokuMaker::generate - 生成数独
+ *   SudokuMaker::echo - 输出数独
+ *   SudokuMaker::newTemplate - 产生新的待填数独棋盘模板
+ *   SudokuMaker::dfs - 深度优先搜索填写数独棋盘
+ *   SudokuMaker::validNumbersQuantity - 某一格可填写数字数量计算
+ *   isNumber - 检验输入的字符串是否数字
+ *   checkStringAndConvertToInteger - 检验输入字符串的合法性，并转换成整数
+ */
 
 #include "stdafx.h"
 
 
 using namespace std;
 
-const int seedNumbers[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+const int seedNumbers[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 const vector< vector<int> > emptyBoard = vector< vector<int> >(9, vector<int>(9, 0));
 
 // 使用方式
@@ -15,18 +26,18 @@ const string usage = "\nUsage:\n  1.Directly run to input the number of Sudoku;\
 int sudokuQuantity = 0;
 
 class SudokuMaker {
-public:
-	void generate();  // 生成数独
-	void echo();  // 输出数独
+	public:
+		void generate();
+		void echo();
 
-private:
-	int	blank = 72;  // 数独棋盘待填格数，新的待填数独棋盘模板初始化后有 72 格待填
-	int	hint = 9;  // 数独棋盘提示格数
-	vector< vector<int> > fullBoard = emptyBoard;  // 完整数独棋盘
-	vector< vector<int> > partialBoard = emptyBoard;  // 挖空后的数独棋盘
-	void newTemplate();  // 产生新的待填数独棋盘模板
-	bool dfs();  // 深度优先搜索填写数独棋盘
-	int validNumbersQuantity(const int row, const int col, vector<int> &mark);  // 某一格可填写数字数量计算
+	private:
+		int	blank = 72;  // 数独棋盘待填格数，新的待填数独棋盘模板初始化后有 72 格待填
+		int	hint = 9;  // 数独棋盘提示格数
+		vector< vector<int> > fullBoard = emptyBoard;  // 完整数独棋盘
+		vector< vector<int> > partialBoard = emptyBoard;  // 挖空后的数独棋盘
+		void newTemplate();
+		bool dfs();
+		int validNumbersQuantity(const int row, const int col, vector<int> &mark);
 };
 
 void SudokuMaker::newTemplate() {
@@ -47,7 +58,7 @@ void SudokuMaker::newTemplate() {
 }
 
 void SudokuMaker::generate() {
-	// 生成数独
+	// 生成完整数独棋盘
 	while (true) {
 		newTemplate();
 		if (dfs()) {
@@ -161,7 +172,7 @@ void SudokuMaker::echo() {
 	cout << "---------" << endl;
 }
 
-bool isInteger(const string &str) {
+bool isNumber(const string &str) {
 	int sizeOfString = str.size();
 	for (int i = 0; i < sizeOfString; i++) {
 		int temp = (int)str[i];
@@ -176,7 +187,7 @@ bool isInteger(const string &str) {
 }
 
 int checkStringAndConvertToInteger(const string &str) {
-	if (isInteger(str)) {
+	if (isNumber(str)) {
 		int convertedInteger = stoi(str);
 		if (convertedInteger > 0 && convertedInteger <= 1000000) {
 			return convertedInteger;
@@ -228,3 +239,4 @@ int main(int argc, char *argv[]) {
 	sudoku.echo();
 	return 0;
 }
+
