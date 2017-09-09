@@ -24,12 +24,30 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="sudokuMaker.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fileController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="usageValidator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Sudoku.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sudokuMaker.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="fileController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="usageValidator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
