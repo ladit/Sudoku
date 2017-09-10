@@ -6,8 +6,8 @@ using namespace std;
 
 class fileController {
 	public:
-		bool open(string outputPath);
-		void write(string outputString);
+		bool open(const string &outputPath);
+		void write(int (&fullBoard)[9][9]);
 		void close();
 
 	private:

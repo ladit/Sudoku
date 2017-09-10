@@ -8,7 +8,6 @@
 
 #include "stdafx.h"
 #include "sudokuMaker.h"
-#include "fileController.h"
 #include "usageValidator.h"
 
 using namespace std;
@@ -25,9 +24,13 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 	sudokuMaker sudoku;
-	sudoku.generate();
-	sudoku.echo();
-	fileController fc;
+	if (sudoku.generateAndPrint(sudokuQuantity)) {
+		cout << "\nCompeleted!\n\n";
+	}
+	else {
+		cout << "\nFile open error!\n\n";
+	}
+	system("pause");
 	return 0;
 }
 

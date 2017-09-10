@@ -4,9 +4,7 @@
  * @author Ladit
  *
  * @functions
- *   sudokuMaker - 构造函数
- *   generate - 生成数独
- *   echo - 输出数独
+ *   generateAndPrint - 循环生成数独并且打印到文件
  *   newTemplate - 产生新的待填数独棋盘模板
  *   dfs - 深度优先搜索填写数独棋盘
  *   validNumbersQuantity - 某一格可填写数字数量计算
@@ -15,75 +13,51 @@
 #include "stdafx.h"
 #include "sudokuMaker.h"
 
-const vector< vector<int> > emptyBoard = vector< vector<int> >(9, vector<int>(9, 0));
-const int seedNumbers[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-sudokuMaker::sudokuMaker() {
-  blank = 72;
-  hint = 9;
-  vector< vector<int> > fullBoard = emptyBoard;
-  vector< vector<int> > partialBoard = emptyBoard;
-}
-
-void sudokuMaker::generate() {
-	// 生成完整数独棋盘
-	while (true) {
-		newTemplate();
-		if (dfs()) {
-			partialBoard = fullBoard;
-			break;
+bool sudokuMaker::generateAndPrint(const int &sudokuQuantity) {
+	// 生成完整数独棋盘并输出
+	if (fc.open(".\\sudoku.txt")) {
+		for (int i = 1; i <= sudokuQuantity; i++) {
+			while (true) {
+				newTemplate();
+				if (dfs()) {
+					fc.write(fullBoard);
+					break;
+				}
+			}
 		}
+		fc.close();
+		return true;
 	}
-
-	// 生成挖空后的数独棋盘
-	hint = 18;
-	blank = 81 - hint;
-	for (int i = 1; i <= blank; i++) {
-		int a = (rand() * 10) % 9;
-		int b = (rand() * 10) % 9;
-		if (partialBoard[a][b] != 0) {
-			partialBoard[a][b] = 0;
-		}
-		else {
-			i--;
-		}
-	}
-}
-
-void sudokuMaker::echo() {
-	cout << "fullBoard:" << endl;
-	cout << "---------" << endl;
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			cout << fullBoard[i][j] << " ";
-		}
-		cout << endl;
-	}
-	cout << "---------" << endl << endl;
-	cout << "partialBoard:" << endl;
-	cout << "---------" << endl;
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			cout << partialBoard[i][j] << " ";
-		}
-		cout << endl;
-	}
-	cout << "---------" << endl;
+	return false;
 }
 
 void sudokuMaker::newTemplate() {
-	srand((unsigned)time(NULL));
+	srand(unsigned(time(nullptr)) + rand());
 
-	fullBoard = emptyBoard;
-	vector<int> randRow(seedNumbers, seedNumbers + 9);
-	fullBoard[0] = randRow;
-	for (int i = 0, j; i < 20; i++) {
-		j = (rand() * 10) % 8 + 1;
-		swap(fullBoard[0][0], fullBoard[0][j]);
-	}
+	blank = 72;
+	hint = 9;
+	
 	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (i == 0) {
+				fullBoard[0][j] = 9-j;
+			}
+			else {
+				fullBoard[i][j] = 0;
+			}
+		}
+	}
+	for (int i = 0, j; i < 20; i++) {
+		j = (rand() * 10) % 7 + 2;
+		swap(fullBoard[0][1], fullBoard[0][j]);
+	}
+	for (int i = 1; i < 9; i++) {
 		int a = (rand() * 10) % 9;
 		int b = (rand() * 10) % 9;
+		if (a + b == 0) {
+			i--;
+			continue;
+		}
 		swap(fullBoard[0][i], fullBoard[a][b]);
 	}
 }
@@ -94,8 +68,7 @@ bool sudokuMaker::dfs() {
 	}
 	int minQuantity = 10;
 	int mini = 0, minj = 0;
-
-	vector<int> mark(10, 0);
+	int mark[10] = {0};
 
 	// 寻找可填写数字数量最少的格子
 	for (int i = 0; i < 9; i++) {
@@ -133,7 +106,7 @@ bool sudokuMaker::dfs() {
 	return true;
 }
 
-int sudokuMaker::validNumbersQuantity(const int row, const int col, vector<int> &mark) {
+int sudokuMaker::validNumbersQuantity(const int &row, const int &col, int (&mark)[10]) {
 	for (int i = 0; i < 10; i++) {
 		mark[i] = 0;
 	}

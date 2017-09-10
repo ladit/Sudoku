@@ -4,9 +4,8 @@
 * @author Ladit
 *
 * @functions
-*   check - ¼ì²éÊäÈë
-*   checkStringAndConvertToInteger - ¼ì²é×Ö·û´®²¢×ª»»³ÉÕûÊı
-*   isNumber - ¼ì²é×Ö·û´®
+*   check - æ£€æŸ¥è¾“å…¥
+*   checkStringAndConvertToInteger - æ£€æŸ¥å­—ç¬¦ä¸²å¹¶è½¬æ¢æˆæ•´æ•°
 */
 
 #include "stdafx.h"
@@ -15,7 +14,7 @@
 int usageValidator::check(int argc, char **argv) {
 	if (argc == 1) {
 		string sudokuQuantityString;
-		cout << "Please input the number of Sudoku:" << endl;
+		cout << "Please input the number of Sudoku: ";
 		cin >> sudokuQuantityString;
 		return checkStringAndConvertToInteger(sudokuQuantityString);
 	}
@@ -32,7 +31,7 @@ int usageValidator::check(int argc, char **argv) {
 int usageValidator::checkStringAndConvertToInteger(const string &str) {
 	size_t sizeOfString = str.size();
 	for (size_t i = 0; i < sizeOfString; i++) {
-		int temp = (int)str[i];
+		int temp = int(str[i]);
 		if (temp >= 48 && temp <= 57) {
 			continue;
 		}
