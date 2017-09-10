@@ -20,21 +20,6 @@ bool fileController::open(const string &outputPath) {
 	return false;
 }
 
-/*
-void fileController::write(int(&fullBoard)[9][9]) {
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			outFile << fullBoard[i][j];
-			if (j != 8) {
-				outFile << " ";
-			}
-		}
-		outFile << endl;
-	}
-	outFile << endl;
-}
-*/
-
 void fileController::write(int(&fullBoard)[9][9]) {
 	string fullBoardString;
 	for (int i = 0; i < 9; i++) {

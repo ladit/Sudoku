@@ -13,7 +13,7 @@
 using namespace std;
 
 // 使用方式
-const string usage = "\nUsage:\n  1.Directly run to input the number of Sudoku;\n  2.\"sudoku -c N\", N (0 < N <= 1000000, integer) is the number of Sudoku.\n\n";
+const string usage = "\nUsage:\n  1.Directly run to input the number of Sudoku;\n  2.\"sudoku.exe -c N\", N (0 < N <= 1000000, integer) is the number of Sudoku.\n\n";
 int sudokuQuantity = 0;
 
 int main(int argc, char *argv[]) {
@@ -30,7 +30,6 @@ int main(int argc, char *argv[]) {
 	else {
 		cout << "\nFile open error!\n\n";
 	}
-	system("pause");
 	return 0;
 }
 

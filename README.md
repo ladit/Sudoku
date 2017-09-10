@@ -11,6 +11,7 @@
 
 程序优化：
   - [vector 使用的简单优化技巧](https://yanyiwu.com/work/2014/05/25/vector-pushback-youhua.html)（弃用vector，直接使用更高效率的数组）
+  - [关于 C++ const 的全面总结](http://blog.csdn.net/eric_jo/article/details/4138548)（使用 const 修饰引用参数，提升效率）
   - 文件读写效率提升（似乎以下文章都一致认为 C 标准的函数效率更高，但这些文章都较为老旧，不知道是否都使用 VS，有使用的版本又较低，新的 VS 使用 MSBuild 作为编译器，不知道 C++ 标准的函数效率是否有改进，为了统一风格，暂时先使用 C++ 标准的 ofstream）
     - [C/C++ 文件操作效率比较——FILE/fstream](http://blog.csdn.net/shudaxia123/article/details/50491451)
     - [fstream 与 C 风格（例如 fread 和 fwrite ）两种读写文件方法的效率比较](http://blog.csdn.net/kevin_ut/article/details/6088489)

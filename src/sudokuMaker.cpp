@@ -14,7 +14,7 @@
 #include "sudokuMaker.h"
 
 bool sudokuMaker::generateAndPrint(const int &sudokuQuantity) {
-	// 生成完整数独棋盘并输出
+	// 生成完整数独棋盘并输出到文件
 	if (fc.open(".\\sudoku.txt")) {
 		for (int i = 1; i <= sudokuQuantity; i++) {
 			while (true) {
@@ -33,7 +33,6 @@ bool sudokuMaker::generateAndPrint(const int &sudokuQuantity) {
 
 void sudokuMaker::newTemplate() {
 	srand(unsigned(time(nullptr)) + rand());
-
 	blank = 72;
 	hint = 9;
 	
